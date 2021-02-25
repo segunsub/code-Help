@@ -35,6 +35,7 @@ function process(obj) {
       console.log(each.video_name)
     }
     let view = document.createElement('div')
+    view.classList.add('display')
     let h2 = document.createElement('h2')
     h2.classList.add('lang')
     let p = document.createElement('p')
@@ -55,6 +56,7 @@ function altprocess(obj) {
       console.log(each.video_name)
     }
     let view = document.createElement('div')
+    view.classList.add('display')
     let h2 = document.createElement('h2')
     h2.classList.add('lang')
     let p = document.createElement('p')
@@ -91,7 +93,16 @@ update
 https://www.codegrepper.com/api/update_answer.php
  */
 
+// alt search
+/*
+https://www.codegrepper.com/api/search.php?q=code&search_options=search_titles,search_code
+https://www.codegrepper.com/api/search_term_alternatives.php?q=code
+https://www.codegrepper.com/api/search.php?q=array&search_options=search_titles,search_code
 
+query parameters
+q: array
+search_options: search_titles,search_code
+*/
 
 
 

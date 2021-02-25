@@ -1,19 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge" /> -->
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="themes/prism.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="index.css"/>
 </head>
 <body>
-    <form id="search">
-        <label>Search Reviews</label>
-        <br>
-         <input id="codesearch" type="text" name="search" placeholder="Search Code">
-    <button id="searchbtn">search</button>
-    <div id="container"></div>
-    </form>
+    <div class="wrapper">
+      <div class="bar">
+          <div class="options"><i style="font-size:25px" class="fa">&#xf039;</i></div>
+                <h2 class='headcenter'>Code Help</h2>
+                <div>About</div>
+      </div>
+        <form id="search">
+
+                <input id="codesearch" type="text" name="search" placeholder="Search Code">
+        <!-- <button id="searchbtn">search</button> -->
+<!-- <pre class="line-numbers">
+  <code class="language-javascript">
+    for (let i = 0; i < array.length; i++) {
+      console.log(i)
+         }
+  </code>
+</pre> -->
+        <div id="container"></div>
+        </form>
+    </div>
+    <script src="prism.js"></script>
     <script src="index.js"></script>
 </body>
 </html>
