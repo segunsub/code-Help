@@ -1,73 +1,135 @@
 document.addEventListener("DOMContentLoaded", () => {
   let form = document.getElementById('search')
    form.addEventListener("submit", grepper);
-   let searchcontain = document.getElementById('container')
+})
 
-   let search
-   let first
-   function grepper(e) {
-    searchcontain.innerText = ''
-    e.preventDefault()
-    search = document.getElementById('codesearch').value
-    searchapi(search)
-    .then(val => {
-      first = val
-      process(val)})
-    e.target[0].value = ''
+let form = document.getElementById('search')
+let search
+let first
+function grepper(e) { 
+  amtclick()
+ e.preventDefault()
+ search = document.getElementById('codesearch').value
+ searchapi(search)
+ .then(val => {
+   first = val
+   process(val)})
+ e.target[0].value = ''
+ form.innerHTML = `<label>Search Bar 
+                <input id="codesearch" type="text" name="search" placeholder="Search Code"></label>`
 }
 let timer = 0
 function process(obj) {
-    if (first.answers.length == 0) {
-    timer ++
-    alt(search)
-    .then(val => {
-      if(first.answers.length == 0 && val.answers.length == 0 && first.more_answers.length == 0) {
-        return searchcontain.innerHTML = `<h1>NO Answer Available At The Moment</h1>` //probably add an action to post. if reached there are no answer
-      }
-      altprocess(val)
-    })
-  }
-  obj.answers.forEach((each) => {
-    if(each.language == 'whatever') {
-      each.language = 'English'
-    }
-    if(each.video_name !== null && each.video_name !== '' ) {
-      console.log(each.video_name)
-    }
-    let view = document.createElement('div')
-    view.classList.add('display')
-    let h2 = document.createElement('h2')
-    h2.classList.add('lang')
-    let p = document.createElement('p')
-    p.classList.add('answer')
-    h2.innerText = `Language: ${each.language}`
-    p.innerText = `${each.answer}`
-    view.append(h2,p)
-   searchcontain.append(view)
-  })
+ if (first.answers.length == 0) {
+ timer ++
+ alt(search)
+ .then(val => {
+   if(first.answers.length == 0 && val.answers.length == 0 && first.more_answers.length == 0) {
+     return form.innerHTML = `<label>Search Bar
+                               <input id="codesearch" type="text" name="search" placeholder="Search Code"></label>
+                               <h1>NO Answer Available At The Moment</h1>`
+                               //probably add an action to post. if reached there are no answer
+   }
+   altprocess(val)
+ })
+}
+obj.answers.forEach((each) => {
+ if(each.language == 'whatever') {
+   each.language = 'English'
+ }
+ if(each.video_name !== null && each.video_name !== '' ) {
+   console.log(each.video_name)
+ }
+ let toolbar = document.createElement('div')
+ toolbar.classList.add('toolbar')
+ let toolbaritem = document.createElement('div')
+ toolbaritem.classList.add('toolbar-item')
+ let barbutton = document.createElement('button')
+    barbutton.type = 'button'
+    barbutton.innerText = 'Copy'
+ let searchcontain = document.createElement('div')
+    searchcontain.classList.add('code-toolbar')
+ let pre = document.createElement('pre')
+ let classesToAdd = [ 'line-numbers', `language-${each.language}`, 'clicker'];
+ pre.classList.add(...classesToAdd);
+ let view = document.createElement('code')
+ view.classList.add(`language-${each.language}`);
+ let h2 = document.createElement('h2')
+ h2.classList.add('lang')
+ let p = document.createElement('p')
+ p.classList.add('answer')
+ h2.innerText = `${each.language}`
+ view.append(h2)
+ view.innerHTML = `${each.answer}`
+ pre.append(view)
+ toolbar.append(toolbaritem)
+ toolbaritem.append(barbutton)
+ searchcontain.append(h2,pre,toolbar)
+form.append(searchcontain)
+})
+
+
 }
 function altprocess(obj) {
-  console.log(obj)
-  obj.answers.forEach((each) => {
-    if(each.language == 'whatever') {
-      each.language = 'English'
-    }
-    if(each.video_name !== null && each.video_name !== '' ) {
-      console.log(each.video_name)
-    }
-    let view = document.createElement('div')
-    view.classList.add('display')
-    let h2 = document.createElement('h2')
-    h2.classList.add('lang')
-    let p = document.createElement('p')
-    p.classList.add('answer')
-    h2.innerText = `Language: ${each.language}`
-    p.innerText = `${each.answer}`
-    view.append(h2,p)
-   searchcontain.append(view)
-  })
-}
+console.log(obj)
+obj.answers.forEach((each) => {
+ if(each.language == 'whatever') {
+   each.language = 'English'
+ }
+ if(each.video_name !== null && each.video_name !== '' ) {
+   console.log(each.video_name)
+ }
+
+
+ let toolbar = document.createElement('div')
+ toolbar.classList.add('toolbar')
+ let toolbaritem = document.createElement('div')
+ toolbaritem.classList.add('toolbar-item')
+ let barbutton = document.createElement('button')
+    barbutton.type = 'button'
+    barbutton.innerText = 'Copy'
+ let searchcontain = document.createElement('div')
+    searchcontain.classList.add('code-toolbar')
+ let pre = document.createElement('pre')
+ let classesToAdd = [ 'line-numbers', `language-${each.language}`, 'clicker'];
+ pre.classList.add(...classesToAdd);
+ let view = document.createElement('code')
+ view.classList.add(`language-${each.language}`);
+ let h2 = document.createElement('h2')
+ h2.classList.add('lang')
+ let p = document.createElement('p')
+ p.classList.add('answer')
+ h2.innerText = `${each.language}`
+ view.append(h2)
+ view.innerHTML = `${each.answer}`
+
+ pre.append(view)
+ toolbar.append(toolbaritem)
+ toolbaritem.append(barbutton)
+ searchcontain.append(h2,pre,toolbar)
+form.append(searchcontain)
 })
+}
+
+
+
+function amtclick(){
+let clickamt = setInterval(() => {
+  let clickchange = document.querySelectorAll('.clicker')
+clickchange.forEach(clc => {
+  Prism.highlightElement(clc)
+  clc.addEventListener('click', () => {
+    clc.style.height = 'auto'
+  })
+})
+if(clickchange.length > 0)clearInterval(clickamt)
+console.log(clickchange)
+}, 1000);
+}
+
+
+
+
 async function searchapi(input) {
     let res = await fetch(`https://www.codegrepper.com/api/get_answers_1.php?v=2&s=${input}`)
     let data = await res.json()
