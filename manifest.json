@@ -1,0 +1,29 @@
+{
+    "name": "Code Help",
+    "short_name": "Codetax",
+    "start_url": ".",
+    "background_color": "#03071e",
+    "theme_color": "#2C310D",
+    "display": "standalone",
+    "icons": [
+        {
+            "src": "icon/wrk.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "icon/gold.png",
+            "sizes": "200x200",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "icon/xxxhdpi.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+
+}
