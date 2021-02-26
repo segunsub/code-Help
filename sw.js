@@ -1,7 +1,15 @@
 self.addEventListener("install", e => {
-    e.waitUntil(
+    e.waitUntil( 
         caches.open("static").then(cache => {
-           return cache.addAll(["./", "./icon/gold.png","./icon/wrk.png","./icon/xxxhdpi.png"])
+           return cache.addAll(["./", "./src/"]) 
         })
-    )
+    )    
+})   
+
+self.addEventListener("fetch", e => {
+   e.respondWith(
+       caches.match(e.request).then(response => {
+           return response || fetch(e.request);
+       })
+   )
 })
