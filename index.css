@@ -29,7 +29,7 @@ body {
 }
 
 .options {
-  background: url(../code-Help/align-justify.svg);
+  background: url(align-justify.svg);
   width: 35px;
   height: 35px;
   background-size: cover;
