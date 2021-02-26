@@ -1,10 +1,11 @@
 {
     "name": "Code Help",
-    "short_name": "Codetax",
+    "short_name": "Code Help",
     "start_url": ".",
-    "background_color": "#03071e",
+    "background_color": "#000000",
     "theme_color": "#2C310D",
     "display": "standalone",
+    "description": "An app that shows code syntax for problem searches.",
     "icons": [       
    {
         "src": "icon/xxxhdpi.png",
