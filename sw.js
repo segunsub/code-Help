@@ -1,10 +1,10 @@
 self.addEventListener("install", e => {
     e.waitUntil( 
         caches.open("static").then(cache => {
-           return cache.addAll(["/", "/src/"]) 
+           return cache.addAll(["./", "./src","./icon"]) 
         })
     )    
-})   
+})    
 
 self.addEventListener("fetch", e => {
    e.respondWith(
