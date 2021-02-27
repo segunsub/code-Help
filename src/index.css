@@ -6,7 +6,7 @@ html::-webkit-scrollbar {
   display: none;
 }
 body {
-    background-color: rgb(37, 35, 35);
+    background-color: black;
     color: white;
 }
 .wrapper {
