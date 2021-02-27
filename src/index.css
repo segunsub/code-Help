@@ -94,7 +94,9 @@ label {
   margin-bottom: 30px;
 
 }
-
+.logo {
+  height: 50px;
+}
 /*overflow-y: scroll;
 
 

@@ -1,0 +1,9 @@
+{  
+    "liveServer.settings.https":   
+    {
+    "enable": false, //set it true to enable the feature.  
+    "cert": "/etc/apache2/server.crt", //full path of the certificate  
+    "key": "/etc/apache2/server.key", //full path of the private key  
+    "passphrase": ""  
+    }  
+    }
