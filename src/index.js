@@ -129,6 +129,9 @@ function copytxt(clck,input) {
   let code = input;
  navigator.clipboard.writeText(code).then(function() {
    clck.innerText = 'copied';
+   setTimeout(() => {
+    clck.innerText = 'copy';
+}, 3000)
  }, function(err) {
    console.error('Could not copy text: ', err);
  });
