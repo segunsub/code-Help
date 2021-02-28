@@ -125,19 +125,37 @@ form.append(searchcontain)
 
 
 
+function copytxt(clck,input) {
+  let code = input;
+ navigator.clipboard.writeText(code).then(function() {
+   clck.innerText = 'copied';
+ }, function(err) {
+   console.error('Could not copy text: ', err);
+ });
+ }
+
 function amtclick(){
 let clickamt = setInterval(() => {
+  let copybtn = document.querySelectorAll('.toolbar-item')
   let clickchange = document.querySelectorAll('.clicker')
-clickchange.forEach(clc => {
+clickchange.forEach((clc,index) => {
+  copybtn[index].addEventListener('click',(e) => copytxt(e.target,clc.innerText))
   Prism.highlightElement(clc)
   clc.addEventListener('click', () => {
     clc.style.height = 'auto'
   })
+  clc.addEventListener('dblclick', () => {
+    clc.style.height = '250px'
+  })
 })
+
+
 if(clickchange.length > 0)clearInterval(clickamt)
 console.log(clickchange)
 }, 1000);
 }
+
+
 
 
 

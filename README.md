@@ -1,5 +1,4 @@
 # code-Help
-  redownload prism js and include copy function.
   change  menu button 
   add Google signin button
   feedback from
