@@ -8,11 +8,11 @@ html::-webkit-scrollbar {
 body {
     background-color: black;
     color: white;
+    width: 100vw
 }
 .wrapper {
     display: flex;
     flex-flow: row wrap;
-    text-align: center;
 }
 .wrapper>* {
     padding: 10px;
@@ -26,6 +26,7 @@ body {
   margin: 0;
   justify-content: space-between;
   align-items: center;
+  padding: 0;
 }
 
 .options {
@@ -42,8 +43,12 @@ body {
    flex-direction: column;
    margin: 0;
    height: 100vh;
-   width: 100VW;
+   width: 98VW;
    align-items: center;
+   padding-left: 0px;
+  padding-right: 2px;
+
+
    /* padding-left: 0; */
 }
 #codesearch {
@@ -72,11 +77,9 @@ body {
   border-radius: 22px;
   height: 250px;
   /* overflow: hidden; */
-  width: inherit;
+  width: inherit; 
 }
-/* .line-numbers:active {
-  height: auto;
-} */
+
 .codealign {
   text-align: left;
 }
@@ -130,7 +133,9 @@ body {
   margin: 0;
   padding: 0
 }
-
+.lang {
+  text-align: center;
+}
 .labelfill {
   font-size: 30px;
   transition: 0.3s;

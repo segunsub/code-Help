@@ -41,7 +41,7 @@ function grepper(e) {
    first = val
    process(val)})
  e.target[0].value = ''
- form.innerHTML = `<label>Search Bar 
+ form.innerHTML = `<label id="voiceover">Search Bar 
                 <input id="codesearch" type="text" name="search" placeholder="Search Code"></label>`
 }
 let timer = 0
@@ -51,7 +51,7 @@ function process(obj) {
  alt(search)
  .then(val => {
    if(first.answers.length == 0 && val.answers.length == 0 && first.more_answers.length == 0) {
-     return form.innerHTML = `<label>Search Bar
+     return form.innerHTML = `<label id="voiceover">Search Bar
                                <input id="codesearch" type="text" name="search" placeholder="Search Code"></label>
                                <h1>NO Answer Available At The Moment</h1>`
                                //probably add an action to post. if reached there are no answer
@@ -78,6 +78,8 @@ obj.answers.forEach((each) => {
  let pre = document.createElement('pre')
  let classesToAdd = [ 'line-numbers', `language-${each.language}`, 'clicker'];
  pre.classList.add(...classesToAdd);
+ pre.style.paddingLeft = '10px'
+ pre.style.paddingRight = '10px'
  let view = document.createElement('code')
  view.classList.add(`language-${each.language}`);
  let h2 = document.createElement('h2')
@@ -119,6 +121,8 @@ obj.answers.forEach((each) => {
  let pre = document.createElement('pre')
  let classesToAdd = [ 'line-numbers', `language-${each.language}`, 'clicker'];
  pre.classList.add(...classesToAdd);
+ pre.style.paddingLeft = '10px'
+ pre.style.paddingRight = '10px'
  let view = document.createElement('code')
  view.classList.add(`language-${each.language}`);
  let h2 = document.createElement('h2')
