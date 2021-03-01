@@ -1,8 +1,22 @@
 document.addEventListener("DOMContentLoaded", () => {
   let form = document.getElementById('search')
    form.addEventListener("submit", grepper);
-})
+   document.getElementById('menubar').addEventListener('click', sideload)
+   document.getElementById('barbtn').addEventListener('click', closenav)
+  
 
+})
+//SideBar function
+function sideload() {
+  let bar = document.getElementById('sidebar')
+  bar.style.width = '50vw'
+  bar.style.paddingTop = "60px"
+}
+function closenav() {
+  let bar = document.getElementById('sidebar')
+  bar.style.width = '0vw'
+  bar.style.paddingTop = "0px"
+}
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("sw.js").then(registration => {
     console.log("SW Registered!");

@@ -21,13 +21,23 @@
 </head>
 <body>
     <div class="wrapper">
+      <div id="sidebar" class="sidebarfilter">
+        <button id="barbtn"><span class="inertxt">+</span></button>
+        <div id="filterflex">
+          <input class="inputbar" type="checkbox" name="filter1">
+          <label class="labelfill" for="filter1"> Search By Titles</label> <br><br> 
+          <input class="inputbar" type="checkbox" name="filter2"> 
+          <label class="labelfill" for="filter1"> Search By Code</label> 
+        </div>
+        <div id="aboutpage">About</div>
+      </div>
       <div class="bar">
-          <div class="options"></div>
+          <div id="menubar" class="options">☰</div>
                 <h2 class='headcenter'>Code Help</h2>
                 <div class="logo"><img class="logo" src="icon/xxxhdpi.png"></div>
       </div>
         <form id="search">
-                 <label>Search Bar
+                 <label id="voiceover">Search Bar
                 <input id="codesearch" type="text" name="search" placeholder="Search Code">
               </label>
                 <!-- <button id="searchbtn">search</button> -->

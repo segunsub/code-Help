@@ -29,11 +29,13 @@ body {
 }
 
 .options {
-  background: url(align-justify.svg);
+  /* background: url(align-justify.svg); */
   width: 35px;
   height: 35px;
   background-size: cover;
-  border-radius: 3px
+  border-radius: 3px;
+  font-size: 200%;
+  cursor: pointer;
 }
 #search {
   display: flex;
@@ -88,7 +90,7 @@ body {
 .code-toolbar {
   width: 95%;
 }
-label {
+#voiceover{
   width: 95%;
   height: 7%;
   color: transparent;
@@ -99,10 +101,55 @@ label {
   height: 60px;
   width: 70px;
 }
+.headcenter {
+  cursor: default;
+}
 /*overflow-y: scroll;
+// Side Bar
+*/
+#barbtn {
+  position: absolute;
+  top: 0;
+  right: 0vw;
+  font-size: 36px;
+  margin-left: 50px;
+}
 
+.sidebarfilter {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color:rgba(37,41,14,0.4);
+  color: white;
+  overflow-x: hidden;
+  transition: 0.5s;
+  text-align: left;
+  margin: 0;
+  padding: 0
+}
 
-
+.labelfill {
+  font-size: 30px;
+  transition: 0.3s;
+  margin: 0px;
+}
+#filterflex {
+text-align: left;
+padding-top: 30%;
+}
+#aboutpage {
+  position: relative;
+  top: 60vh;
+  width: 100%;
+  font-size: 30px;
+}
+@media screen and (max-height: 450px) {
+  .sidebarfilter {padding-top: 15px;}
+  .inputbar {font-size: 18px;}
+}
 
 
 

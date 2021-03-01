@@ -4,7 +4,6 @@
   feedback from
   add about
   add YouTube videos for extra help and mdn search api
-  prevent search bar from zooming in
   implement custom search (extra feature)
   update color scheme if needed
   add checkbox search filter
