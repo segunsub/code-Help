@@ -6,8 +6,15 @@ document.addEventListener("DOMContentLoaded", () => {
    buttonbar.addEventListener('click', closenav)
    let reveal = document.getElementById('reveal')
    let headbar = document.getElementById('headerbar')
-
+   let getstartedpage = document.getElementById('getstarted')
+   let getstartedbtn = document.getElementById('getstartedbtn')
+   getstartedbtn.addEventListener('click',()=>removepage(getstartedpage))
+   
 })
+//Start page
+function removepage(page) {
+  page.style.display = 'none'
+}
 //SideBar function
 function sideload(e) {
   setTimeout(() =>{

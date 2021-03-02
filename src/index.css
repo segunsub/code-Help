@@ -10,6 +10,15 @@ body {
     color: white;
     width: 100vw
 }
+/*starting page*/
+#getstarted {
+  background-color: red;
+  position: absolute;
+  /* display: none; */
+  width: 100%;
+  height: 100vh;
+  /* z-index: 1; */
+}
 .wrapper {
     display: flex;
     flex-flow: row wrap;
@@ -47,7 +56,7 @@ body {
   display: flex;
    flex-direction: column;
    margin: 0;
-   height: 100vh;
+   height: 90vh;
    width: 98VW;
    align-items: center;
    padding-left: 0px;
