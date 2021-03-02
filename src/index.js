@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
    let buttonbar = document.getElementById('barbtn')
    buttonbar.addEventListener('click', closenav)
    let reveal = document.getElementById('reveal')
+   let headbar = document.getElementById('headerbar')
 
 })
 //SideBar function
@@ -139,6 +140,7 @@ obj.answers.forEach((each) => {
  h2.classList.add('lang')
  let p = document.createElement('p')
  p.classList.add('answer')
+ let langtitle = document.getElementById('rmcodename')
  if(!langtitle.checked) {
   h2.innerText = `${each.language}`
  }
