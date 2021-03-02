@@ -27,15 +27,20 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 0;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.bar h2 {
+  font-size: 45px;
+  font-family: monospace;
+  color: rgb(228, 224, 224);
 }
 
 .options {
   /* background: url(align-justify.svg); */
   width: 35px;
   height: 35px;
-  background-size: cover;
   border-radius: 3px;
-  font-size: 200%;
   cursor: pointer;
 }
 #search {
@@ -56,11 +61,17 @@ body {
   height: 100%;
   width: 95%;
   font-size: xx-large;
+  background-color: rgb(228, 224, 224);
+  border-color: gold;
+
 }
 .toolbar-item {
   background-color: black;
   border-radius: 22px;
   color: white;
+}
+.toolbar-item:hover {
+  color: gold;
 }
 /* #container {
   display: flex;
@@ -112,10 +123,12 @@ body {
 */
 #barbtn {
   position: absolute;
-  top: 0;
+  top: 0px;
   right: 0vw;
-  font-size: 36px;
   margin-left: 50px;
+  /* background-color: rgba(255, 255, 255, 0.747); */
+  background-color: black;
+  border-radius: 50%;
 }
 
 .sidebarfilter {
@@ -133,26 +146,38 @@ body {
   margin: 0;
   padding: 0
 }
+#username {
+  margin-top: 50px
+}
 .lang {
   text-align: center;
+  font-family: sans-serif;
 }
 .labelfill {
   font-size: 30px;
   transition: 0.3s;
   margin: 0px;
+  /* background-color: black; */
+  border-radius: 15pc;
+  font-family: monospace;
 }
 #filterflex {
 text-align: left;
 padding-top: 30%;
 }
 #aboutpage {
-  position: relative;
-  top: 60vh;
+  position: sticky;
+  top: 100%;
   width: 100%;
   font-size: 30px;
 }
+#reveal {
+  height: 93%;
+  width: inherit;
+  display: none;
+}
 @media screen and (max-height: 450px) {
-  .sidebarfilter {padding-top: 15px;}
+  /* .sidebarfilter {padding-top: 15px;} */
   .inputbar {font-size: 18px;}
 }
 

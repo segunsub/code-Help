@@ -2,17 +2,24 @@ document.addEventListener("DOMContentLoaded", () => {
   let form = document.getElementById('search')
    form.addEventListener("submit", grepper);
    document.getElementById('menubar').addEventListener('click', sideload)
-   document.getElementById('barbtn').addEventListener('click', closenav)
-  
+   let buttonbar = document.getElementById('barbtn')
+   buttonbar.addEventListener('click', closenav)
+   let reveal = document.getElementById('reveal')
 
 })
 //SideBar function
-function sideload() {
+function sideload(e) {
+  setTimeout(() =>{
+    reveal.style.display = 'block' 
+ }, 300)
   let bar = document.getElementById('sidebar')
   bar.style.width = '50vw'
-  bar.style.paddingTop = "60px"
+  // bar.style.paddingTop = "60px"
+ e.target.style.display = 'none'
 }
 function closenav() {
+  reveal.style.display = 'none' 
+  document.querySelector('#menubar').firstChild.style.display = 'block'
   let bar = document.getElementById('sidebar')
   bar.style.width = '0vw'
   bar.style.paddingTop = "0px"
@@ -86,7 +93,10 @@ obj.answers.forEach((each) => {
  h2.classList.add('lang')
  let p = document.createElement('p')
  p.classList.add('answer')
- h2.innerText = `${each.language}`
+ let langtitle = document.getElementById('rmcodename')
+ if(!langtitle.checked) {
+  h2.innerText = `${each.language}`
+ }
  view.append(h2)
  view.innerHTML = `${each.answer}`
  pre.append(view)
@@ -122,14 +132,16 @@ obj.answers.forEach((each) => {
  let classesToAdd = [ 'line-numbers', `language-${each.language}`, 'clicker'];
  pre.classList.add(...classesToAdd);
  pre.style.paddingLeft = '10px'
- pre.style.paddingRight = '10px'
+  pre.style.paddingRight = '10px'
  let view = document.createElement('code')
  view.classList.add(`language-${each.language}`);
  let h2 = document.createElement('h2')
  h2.classList.add('lang')
  let p = document.createElement('p')
  p.classList.add('answer')
- h2.innerText = `${each.language}`
+ if(!langtitle.checked) {
+  h2.innerText = `${each.language}`
+ }
  view.append(h2)
  view.innerHTML = `${each.answer}`
 
@@ -182,9 +194,26 @@ console.log(clickchange)
 
 
 async function searchapi(input) {
+  let bycode = document.getElementById('bycode')
+  let bytitle = document.getElementById('bytitle')
+  console.log(bycode.checked)
+  if (bycode.checked && bytitle.checked) {
+    let res = await fetch(`https://www.codegrepper.com/api/search.php?q=${input}&search_options=search_titles,search_code`)
+    let data = await res.json()
+    return data
+  }else if(bycode.checked) {
+    let res = await fetch(`https://www.codegrepper.com/api/search.php?q=${input}&search_options=search_code`)
+    let data = await res.json()
+    return data
+  }else if (bytitle.checked) {
+    let res = await fetch(`https://www.codegrepper.com/api/search.php?q=${input}&search_options=search_titles`)
+    let data = await res.json()
+    return data
+  }else{
     let res = await fetch(`https://www.codegrepper.com/api/get_answers_1.php?v=2&s=${input}`)
     let data = await res.json()
     return data
+  }
 }
 async function alt(input) {
   let res = await fetch(`https://www.codegrepper.com/api/search.php?q=${input}`)

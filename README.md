@@ -1,13 +1,10 @@
 # code-Help
-  change  menu button 
   add Google signin button
   feedback from
   add about
   add YouTube videos for extra help and mdn search api
   implement custom search (extra feature)
   update color scheme if needed
-  add checkbox search filter
-  add checkbox to remove title
   implement service workers ability to save response
   add get started page
   (search bar with color highlight 

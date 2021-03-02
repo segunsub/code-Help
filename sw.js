@@ -2,7 +2,7 @@ self.addEventListener("install", e => {
     e.waitUntil( 
         caches.open("static").then(cache => {
 
-           return cache.addAll(["sw.js","index.html","manifest.json","src/index.js","src/index.css","icon/iphone6_splash.png","icon/iphoneplus_splash.png","icon/iphonex_splash.png","icon/iphonexsmax_splash.png","src/prism.css","src/prism.js","src/align-justify.svg","icon/iphonexr_splash.png","icon/gold.png","icon/wrk.png","icon/xxxhdpi.png"]) 
+           return cache.addAll(["sw.js","index.html","manifest.json","src/index.js","src/index.css","icon/iphone6_splash.png","icon/iphoneplus_splash.png","icon/iphonex_splash.png","icon/iphonexsmax_splash.png","src/prism.css","src/prism.js","icon/iphonexr_splash.png","icon/innerlogo.png","icon/gold.png","icon/wrk.png","icon/xxxhdpi.png"]) 
         })
     )     
 })       
