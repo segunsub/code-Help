@@ -37,23 +37,24 @@ function moveTouch(e) {
   if (Math.abs(diffX) > Math.abs(diffY)) {
     // sliding horizontally
     if (diffX > 0) {
-      if(slidtrck <= 0)return
+      if(slidtrck >= 3)return
       // swiped left
-      slidtrck--
+      slidtrck++
    
       let arr = Array.from(slider)
       arr.forEach((x,y) => {
         x.style.width = '10%'
         x.style.backgroundColor = 'black'
         startp[y].style.display = 'none'
+        startp[y].children[0].style.fontSize = 'xx-large'
       })
       slider[slidtrck].style.width = '40%'
       slider[slidtrck].style.backgroundColor = 'gold'
       startp[slidtrck].style.display = 'block'
     } else {
-      if(slidtrck >= 3)return
+      if(slidtrck <= 0)return
       // swiped right 
-      slidtrck ++
+      slidtrck--
       
       let arr = Array.from(slider)
       arr.forEach((x,y) => {

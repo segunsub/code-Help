@@ -68,13 +68,19 @@ body {
 /*starting page  description */
 #descript {
   display: flex;
+  text-align: center;
 
 }
 .descripts {
     display: none;
     padding-left: 5px;
+    font-family: Arial;
   /* height: ; */
 }
+.desp1 strong {
+  font-size: xx-large;
+}
+
 .desp1 {
   display: block;
 } 
