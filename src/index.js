@@ -12,6 +12,66 @@ document.addEventListener("DOMContentLoaded", () => {
    
 })
 //Start page
+let startpage = document.getElementById('getstarted')
+let slider = document.querySelector('#slider').children
+let startp = document.querySelector('#descript').children
+startpage.addEventListener("touchstart", startTouch, false);
+startpage.addEventListener("touchmove", moveTouch, false);
+let slidtrck = 0
+let startx = null;
+let starty = null;
+function startTouch(e) {
+  startx = e.touches[0].clientX;
+  starty = e.touches[0].clientY;
+}
+function moveTouch(e) {
+  if (startx === null)return; 
+  if (starty === null)return;
+ 
+  let currentX = e.touches[0].clientX;
+  let currentY = e.touches[0].clientY;
+ 
+  let diffX = startx - currentX;
+  let diffY = starty - currentY;
+ 
+  if (Math.abs(diffX) > Math.abs(diffY)) {
+    // sliding horizontally
+    if (diffX > 0) {
+      if(slidtrck <= 0)return
+      // swiped left
+      slidtrck--
+   
+      let arr = Array.from(slider)
+      arr.forEach((x,y) => {
+        x.style.width = '10%'
+        x.style.backgroundColor = 'black'
+        startp[y].style.display = 'none'
+      })
+      slider[slidtrck].style.width = '40%'
+      slider[slidtrck].style.backgroundColor = 'gold'
+      startp[slidtrck].style.display = 'block'
+    } else {
+      if(slidtrck >= 3)return
+      // swiped right 
+      slidtrck ++
+      
+      let arr = Array.from(slider)
+      arr.forEach((x,y) => {
+        x.style.width = '10%'
+        x.style.backgroundColor = 'black'
+        startp[y].style.display = 'none'
+      })
+      slider[slidtrck].style.width = '40%'
+      slider[slidtrck].style.backgroundColor = 'gold'
+      startp[slidtrck].style.display = 'block'
+    }  
+  }
+ 
+  startx = null;
+  starty = null;
+   
+  e.preventDefault();
+}
 function removepage(page) {
   page.style.display = 'none'
 }
@@ -205,7 +265,6 @@ console.log(clickchange)
 async function searchapi(input) {
   let bycode = document.getElementById('bycode')
   let bytitle = document.getElementById('bytitle')
-  console.log(bycode.checked)
   if (bycode.checked && bytitle.checked) {
     let res = await fetch(`https://www.codegrepper.com/api/search.php?q=${input}&search_options=search_titles,search_code`)
     let data = await res.json()
