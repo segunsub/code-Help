@@ -11,6 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
    getstartedbtn.addEventListener('click',()=>removepage(getstartedpage))
    
 })
+srhchoice.addEventListener('click', (e) => {
+  console.log(srhchoice.value)
+})
 //Start page
 let startpage = document.getElementById('getstarted')
 let slider = document.querySelector('#slider').children
@@ -106,13 +109,19 @@ if ("serviceWorker" in navigator) {
 }
 
 let form = document.getElementById('search')
+form.addEventListener('click',() => {
+  let bar = document.getElementById('sidebar')
+  if(bar.style.width === '50vw') {
+    closenav()
+  }
+})
 let search
 let first
 function grepper(e) { 
   amtclick()
  e.preventDefault()
  search = document.getElementById('codesearch').value
- searchapi(search)
+ searchapi(search,srhchoice.value)
  .then(val => {
    first = val
    process(val)})
@@ -122,11 +131,18 @@ function grepper(e) {
 }
 let timer = 0
 function process(obj) {
+  console.log(obj)
  if (first.answers.length == 0) {
  timer ++
  alt(search)
  .then(val => {
-   if(first.answers.length == 0 && val.answers.length == 0 && first.more_answers.length == 0) {
+   console.log(val, 'hey')
+   if(val.answers.length == 0){
+    return form.innerHTML = `<label id="voiceover">Search Bar
+    <input id="codesearch" type="text" name="search" placeholder="Search Code"></label>
+    <h1>NO Answer Available At The Moment</h1>`
+   }
+   if(val.answers.length == 0 && first.answers.length == 0 && first.more_answers.length == 0) {
      return form.innerHTML = `<label id="voiceover">Search Bar
                                <input id="codesearch" type="text" name="search" placeholder="Search Code"></label>
                                <h1>NO Answer Available At The Moment</h1>`
@@ -236,7 +252,7 @@ function copytxt(clck,input) {
    console.error('Could not copy text: ', err);
  });
  }
-
+let timerchange = 0
 function amtclick(){
 let clickamt = setInterval(() => {
   let copybtn = document.querySelectorAll('.toolbar-item')
@@ -251,10 +267,10 @@ clickchange.forEach((clc,index) => {
     clc.style.height = '250px'
   })
 })
+timerchange++
 
 
-if(clickchange.length > 0)clearInterval(clickamt)
-console.log(clickchange)
+if(clickchange.length > 0 || timerchange >= 5)clearInterval(clickamt)
 }, 1000);
 }
 
@@ -263,7 +279,7 @@ console.log(clickchange)
 
 
 
-async function searchapi(input) {
+async function searchapi(input,bysearch) {
   let bycode = document.getElementById('bycode')
   let bytitle = document.getElementById('bytitle')
   if (bycode.checked && bytitle.checked) {
@@ -275,7 +291,7 @@ async function searchapi(input) {
     let data = await res.json()
     return data
   }else if (bytitle.checked) {
-    let res = await fetch(`https://www.codegrepper.com/api/search.php?q=${input}&search_options=search_titles`)
+    let res = await fetch(`https://www.codegrepper.com/api/search.php?q=${input} ${bysearch}&search_options=search_titles`)
     let data = await res.json()
     return data
   }else{
@@ -300,6 +316,26 @@ https://www.codegrepper.com/api/search.php?q=${input}
 /* post api
 https://www.codegrepper.com/api/save_answer.php
 
+result save 
+https://www.codegrepper.com/api/get_answers_2.php?v=2
+
+results: ["https://www.w3schools.com/js/js_loop_for.asp", "https://www.w3schools.com/jsref/jsref_forin.asp",…]
+0: "https://www.w3schools.com/js/js_loop_for.asp"
+1: "https://www.w3schools.com/jsref/jsref_forin.asp"
+2: "https://beginnersbook.com/2017/08/cpp-for-loop/"
+3: "https://support.khanacademy.org/hc/en-us/articles/203327020-When-do-I-use-a-for-loop-and-when-do-I-use-a-while-loop-in-the-JavaScript-challenges-"
+4: "https://en.wikipedia.org/wiki/For_loop"
+5: "https://www.w3schools.com/python/python_for_loops.asp"
+6: "https://www.w3schools.com/java/java_for_loop.asp"
+7: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for"
+8: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Loops_and_iteration"
+9: "https://www.programiz.com/c-programming/c-for-loop"
+10: "https://www.mathworks.com/help/matlab/ref/for.html"
+11: "https://wiki.python.org/moin/ForLoop"
+search: "for loop"
+user_id: 214760
+
+
 update
 https://www.codegrepper.com/api/update_answer.php
  */
@@ -313,7 +349,24 @@ https://www.codegrepper.com/api/search.php?q=array&search_options=search_titles,
 query parameters
 q: array
 search_options: search_titles,search_code
+
+
+
+
+rating feedback post
+https://www.codegrepper.com/api/feedback.php?vote=1&search_answer_id=38287&search_answer_result_id
+
+vote: 1
+search_answer_id: 38287
+search_answer_result_id: 23185238
+u: 214760
+{id: 37427, term: "for loop",…}
+id: 37427
+results: ["https://www.w3schools.com/js/js_loop_for.asp", "https://www.w3schools.com/jsref/jsref_forin.asp",…]
+term: "for loop"
 */
+
+
 
 
 
