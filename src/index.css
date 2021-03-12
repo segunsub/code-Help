@@ -152,6 +152,9 @@ body {
   background-color: black;
   border-radius: 22px;
   color: white;
+  display: flex;
+  width: 5.5em;
+  justify-content: space-between;
 }
 .toolbar-item:hover {
   color: gold;
@@ -237,7 +240,7 @@ body {
   font-family: sans-serif;
 }
 .labelfill {
-  font-size: 30px;
+  font-size: 20px;
   transition: 0.3s;
   margin: 0px;
   /* background-color: black; */

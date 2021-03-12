@@ -11,15 +11,19 @@ document.addEventListener("DOMContentLoaded", () => {
    getstartedbtn.addEventListener('click',()=>removepage(getstartedpage))
    
 })
+const user = new Save()
 srhchoice.addEventListener('click', (e) => {
   console.log(srhchoice.value)
 })
 //Start page
 let startpage = document.getElementById('getstarted')
+let mainpage = document.getElementById('search')
 let slider = document.querySelector('#slider').children
 let startp = document.querySelector('#descript').children
 startpage.addEventListener("touchstart", startTouch, false);
 startpage.addEventListener("touchmove", moveTouch, false);
+mainpage.addEventListener("touchstart", startTouch, false);
+mainpage.addEventListener("touchmove", moveTouch, false);
 let slidtrck = 0
 let startx = null;
 let starty = null;
@@ -40,10 +44,18 @@ function moveTouch(e) {
   if (Math.abs(diffX) > Math.abs(diffY)) {
     // sliding horizontally
     if (diffX > 0) {
+          //sidebar menu close
+          let bar = document.getElementById('sidebar')
+          if(bar.style.width === '50vw') {
+            closenav()
+          }
       if(slidtrck >= 3)return
       // swiped left
+
       slidtrck++
-   
+      
+
+
       let arr = Array.from(slider)
       arr.forEach((x,y) => {
         x.style.width = '10%'
@@ -55,6 +67,7 @@ function moveTouch(e) {
       slider[slidtrck].style.backgroundColor = 'gold'
       startp[slidtrck].style.display = 'block'
     } else {
+      sideload()
       if(slidtrck <= 0)return
       // swiped right 
       slidtrck--
@@ -87,7 +100,11 @@ function sideload(e) {
   let bar = document.getElementById('sidebar')
   bar.style.width = '50vw'
   // bar.style.paddingTop = "60px"
- e.target.style.display = 'none'
+  if(e !== undefined){
+    e.target.style.display = 'none'
+  }else {
+    document.getElementById('menuimg').style.display = 'none'
+  }
 }
 function closenav() {
   reveal.style.display = 'none' 
@@ -165,6 +182,10 @@ obj.answers.forEach((each) => {
  let barbutton = document.createElement('button')
     barbutton.type = 'button'
     barbutton.innerText = 'Copy'
+let savebutton = document.createElement('button')
+     savebutton.type = 'button'
+     savebutton.classList.add('svbtn')
+     savebutton.innerText = 'Save'
  let searchcontain = document.createElement('div')
     searchcontain.classList.add('code-toolbar')
  let pre = document.createElement('pre')
@@ -186,7 +207,8 @@ obj.answers.forEach((each) => {
  view.innerHTML = `${each.answer}`
  pre.append(view)
  toolbar.append(toolbaritem)
- toolbaritem.append(barbutton)
+ toolbaritem.style.display = 'flex'
+ toolbaritem.append(savebutton,barbutton)
  searchcontain.append(h2,pre,toolbar)
 form.append(searchcontain)
 })
@@ -211,6 +233,10 @@ obj.answers.forEach((each) => {
  let barbutton = document.createElement('button')
     barbutton.type = 'button'
     barbutton.innerText = 'Copy'
+  let savebutton = document.createElement('button')
+  savebutton.type = 'button'
+  savebutton.classList.add('svbtn')
+  savebutton.innerText = 'Save'
  let searchcontain = document.createElement('div')
     searchcontain.classList.add('code-toolbar')
  let pre = document.createElement('pre')
@@ -233,7 +259,8 @@ obj.answers.forEach((each) => {
 
  pre.append(view)
  toolbar.append(toolbaritem)
- toolbaritem.append(barbutton)
+ toolbaritem.style.display = 'flex'
+ toolbaritem.append(savebutton,barbutton)
  searchcontain.append(h2,pre,toolbar)
 form.append(searchcontain)
 })
@@ -242,7 +269,23 @@ form.append(searchcontain)
 
 
 function copytxt(clck,input) {
-  let code = input;
+  console.log(input)
+  if(clck.classList[0] == 'svbtn') {
+    if(clck.innerText !== 'Saved') {
+      if(user.saveList[input.classList[2]] === undefined){
+        user.saveList[input.classList[2]] = [input.innerHTML]
+      }else {
+        user.saveList[input.classList[2]].push(input.innerHTML)
+      }
+      user.setSaveList()
+      clck.innerText = 'Saved';
+  }
+    
+
+  return
+  }
+
+  let code = input.innerText;
  navigator.clipboard.writeText(code).then(function() {
    clck.innerText = 'copied';
    setTimeout(() => {
@@ -258,7 +301,7 @@ let clickamt = setInterval(() => {
   let copybtn = document.querySelectorAll('.toolbar-item')
   let clickchange = document.querySelectorAll('.clicker')
 clickchange.forEach((clc,index) => {
-  copybtn[index].addEventListener('click',(e) => copytxt(e.target,clc.innerText))
+  copybtn[index].addEventListener('click',(e) => copytxt(e.target,clc))
   Prism.highlightElement(clc)
   clc.addEventListener('click', () => {
     clc.style.height = 'auto'

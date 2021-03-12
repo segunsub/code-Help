@@ -102,17 +102,18 @@
                 <option value="Julia">Julia</option>
                 <option value="Delphi">Delphi</option>
                 <option value="Abap">Abap</option>
-              </select><br> 
+              </select><br><br>
               <input id="bycode" class="inputbar" type="checkbox" name="filter2"> 
               <label class="labelfill" for="filter1"> Search By Code</label> <br><br>
               <input id="rmcodename" class="inputbar" type="checkbox" name="codename"> 
-              <label class="labelfill" for="codename"> Remove Code Lable</label> 
+              <label class="labelfill" for="codename"> Remove Code Lable</label> <br><br>
+              <button id="savedList">Codesaved</button>
           </div>
           <div id="aboutpage">About</div>
       </div>
     </div>
       <div class="bar">
-          <div id="menubar" class="options"><img src="https://img.icons8.com/ios/35/ffffff/menu--v3.png" alt="menubar icon"/></div>
+          <div id="menubar" class="options"><img id="menuimg" src="https://img.icons8.com/ios/35/ffffff/menu--v3.png" alt="menubar icon"/></div>
                 <h2 class='headcenter'>Code Help</h2>
                 <div class="logo"><img class="logo" src="icon/innerlogo.png" alt="app logo"></div>
       </div>
@@ -125,8 +126,9 @@
     </div>
   
     <!-- <pre><code class="language-js" data-prismjs-copy="Copy the JavaScript snippet!">console.log('Hello, world!');</code></pre> -->
-
+    <script src="src/storage.js"></script>
     <script src="src/prism.js"></script>
     <script src="src/index.js"></script>
+    <script src="src/savedsyntax.js"></script>
 </body>
 </html>
