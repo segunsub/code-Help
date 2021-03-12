@@ -268,8 +268,18 @@ padding-top: 30%;
 }
 
 
-
-
+/* saved answers */
+#savedAnswers {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  height: 90vh;
+  width: 98VW;
+  align-items: center;
+  padding-left: 0px;
+  padding-right: 2px;
+  overflow-y: scroll;
+}
 
 
 

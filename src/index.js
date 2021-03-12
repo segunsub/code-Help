@@ -137,6 +137,8 @@ let first
 function grepper(e) { 
   amtclick()
  e.preventDefault()
+ e.target.style.height = '90vh'
+ e.target[0].style.height = '7%'
  search = document.getElementById('codesearch').value
  searchapi(search,srhchoice.value)
  .then(val => {
@@ -274,8 +276,10 @@ function copytxt(clck,input) {
     if(clck.innerText !== 'Saved') {
       if(user.saveList[input.classList[2]] === undefined){
         user.saveList[input.classList[2]] = [input.innerHTML]
+        postAnswer(input.classList[2],input.innerHTML,form)
       }else {
         user.saveList[input.classList[2]].push(input.innerHTML)
+        postAnswer(input.classList[2],input.innerHTML,form)
       }
       user.setSaveList()
       clck.innerText = 'Saved';

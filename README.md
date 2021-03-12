@@ -1,4 +1,6 @@
 # code-Help
+    Make the saved syntax a div that get populated everytime
+    a syntax is saved
     add Google signin button
     feedback from
     add about
