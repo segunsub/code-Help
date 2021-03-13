@@ -1,3 +1,12 @@
+
+
+
+
+
+
+
+
+
 let button = document.getElementById('savedList')
 let searchpage 
 button.addEventListener('click', revealdiv)
@@ -10,39 +19,26 @@ function revealdiv() {
    form.style.height = '9vh'
    form.firstChild.style.height = "70%"   
    answerdiv.style.display = 'block'
-   answerdiv.style.backgroundColor = 'rgb(228,230,232)'
+   // answerdiv.style.backgroundColor = 'rgb(228,230,232)'
 }
-
 function postAnswer(title,syntax,form) {
-   searchpage = form
-   console.log(title, syntax)
-   // let answers =  user.getSaveList()
-
-      //  console.log(key, answers[key])
+      if(form !== undefined) {
+         searchpage = form
+      }else{}
        let codebar = document.createElement('div')
-       codebar.classList.add('code-toolbar')
-       codebar.style.backgroundColor = 'silver'
+       codebar.classList.add('codeToolBar')
        let codetitle = document.createElement('h2')
-       codetitle.classList.add('lang')
-       codetitle.innerText = title
+       codetitle.classList.add('codeLang')
+       codetitle.innerText = title.slice(9, 19)
        let codepre = document.createElement('pre')
-       codepre.classList.add('line-numbers','clicker')
+       codepre.classList.add('codeBox')
        codepre.innerHTML = syntax
        let codetoolbar = document.createElement('div')
-       codetoolbar.classList.add('toolbar')
-       let codetoolbaritem = document.createElement('div')
-       codetoolbaritem.classList.add('toolbar-item')
+       codetoolbar.classList.add('toolBar')
        let codebutton = document.createElement('button')
-       codebutton.type = button
+       codebutton.classList.add('codeBtn')
        codebutton.innerText = 'Copy'
-
-
-
-
-       codetoolbaritem.append(codebutton)
-       codetoolbar.append(codetoolbaritem)
-       codebar.append(codetitle,codepre,codetoolbar)
+       codetoolbar.append(codetitle,codebutton)
+       codebar.append(codetoolbar,codepre)
        answerdiv.append(codebar)
-   
-
 }

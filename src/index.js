@@ -8,10 +8,17 @@ document.addEventListener("DOMContentLoaded", () => {
    let headbar = document.getElementById('headerbar')
    let getstartedpage = document.getElementById('getstarted')
    let getstartedbtn = document.getElementById('getstartedbtn')
-   getstartedbtn.addEventListener('click',()=>removepage(getstartedpage))
-   
+   getstartedbtn.addEventListener('click',()=>removepage(getstartedpage))   
 })
 const user = new Save()
+//localStorage populate user save tab
+let savedSyntax = user.getSaveList()
+for(let keys in savedSyntax) {
+  savedSyntax[keys].forEach(txt => {
+    postAnswer(keys,txt)
+  })
+}
+
 srhchoice.addEventListener('click', (e) => {
   console.log(srhchoice.value)
 })
@@ -24,6 +31,8 @@ startpage.addEventListener("touchstart", startTouch, false);
 startpage.addEventListener("touchmove", moveTouch, false);
 mainpage.addEventListener("touchstart", startTouch, false);
 mainpage.addEventListener("touchmove", moveTouch, false);
+savedAnswers.addEventListener("touchstart", startTouch, false);
+savedAnswers.addEventListener("touchmove", moveTouch, false);
 let slidtrck = 0
 let startx = null;
 let starty = null;
@@ -67,7 +76,9 @@ function moveTouch(e) {
       slider[slidtrck].style.backgroundColor = 'gold'
       startp[slidtrck].style.display = 'block'
     } else {
-      sideload()
+      if(getstarted.style.display === 'none') {
+        sideload()
+      }
       if(slidtrck <= 0)return
       // swiped right 
       slidtrck--
@@ -135,6 +146,8 @@ form.addEventListener('click',() => {
 let search
 let first
 function grepper(e) { 
+let answerdiv = document.getElementById('savedAnswers')
+answerdiv.style.display = 'none'
   amtclick()
  e.preventDefault()
  e.target.style.height = '90vh'
