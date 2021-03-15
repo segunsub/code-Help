@@ -8,7 +8,22 @@ document.addEventListener("DOMContentLoaded", () => {
    let headbar = document.getElementById('headerbar')
    let getstartedpage = document.getElementById('getstarted')
    let getstartedbtn = document.getElementById('getstartedbtn')
-   getstartedbtn.addEventListener('click',()=>removepage(getstartedpage))   
+   getstartedbtn.addEventListener('click',()=>removepage(getstartedpage)) 
+   
+   
+
+   let copybtnsave = document.querySelectorAll('.codeBtn')
+   copybtnsave.forEach(btn => {
+      btn.addEventListener('click',(e) => copytxtsvc(e.path[2].children[1].innerText))
+   })
+   function copytxtsvc(input) {
+        navigator.clipboard.writeText(input).then(function() {
+          copybtnsave.innerText = 'copied';
+          setTimeout(() => {
+          copybtnsave.innerText = 'Copy';
+      }, 3000)
+        })
+   }
 })
 const user = new Save()
 //localStorage populate user save tab
