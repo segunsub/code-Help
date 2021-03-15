@@ -288,15 +288,14 @@ padding-top: 30%;
 .toolBar {
   font-size: large;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-around;
   /* margin-bottom: 2em; */
   align-items: center;
 }
 .codeBtn {
-  margin-left: 7em;
   border-radius: 0.5em;
-  height: 1.68em;
-  margin-right: .5em;
+  height: 1.7em;
+  width: 3.5em;
   color: #a5a5a5;
   background: #232222;
   box-shadow: 0 2px 0 0 rgb(255 224 0 / 64%);

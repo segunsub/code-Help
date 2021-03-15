@@ -38,7 +38,10 @@ function postAnswer(title,syntax,form) {
        let codebutton = document.createElement('button')
        codebutton.classList.add('codeBtn')
        codebutton.innerText = 'Copy'
-       codetoolbar.append(codetitle,codebutton)
+       let codebuttondel = document.createElement('button')
+       codebuttondel.classList.add('codeBtn')
+       codebuttondel.innerText = 'Delete'
+       codetoolbar.append(codebuttondel,codetitle,codebutton)
        codebar.append(codetoolbar,codepre)
        answerdiv.append(codebar)
 }

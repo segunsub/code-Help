@@ -22,25 +22,40 @@ for(let keys in savedSyntax) {
 srhchoice.addEventListener('click', (e) => {
   console.log(srhchoice.value)
 })
+let check = true
 //Start page
 let startpage = document.getElementById('getstarted')
 let mainpage = document.getElementById('search')
 let slider = document.querySelector('#slider').children
 let startp = document.querySelector('#descript').children
+let startcircle = document.getElementById('circle')
 startpage.addEventListener("touchstart", startTouch, false);
 startpage.addEventListener("touchmove", moveTouch, false);
-mainpage.addEventListener("touchstart", startTouch, false);
-mainpage.addEventListener("touchmove", moveTouch, false);
-savedAnswers.addEventListener("touchstart", startTouch, false);
-savedAnswers.addEventListener("touchmove", moveTouch, false);
+let slidedisable = document.getElementById('slide')
+slidedisable.addEventListener('click', () => {
+  if(slidedisable.checked) {
+   check = false
+   }else {
+    check = true
+   }
+})
+//beta fix
+window.addEventListener("touchstart", startTouch, false);
+window.addEventListener("touchmove", moveTouch, false);
+// mainpage.selector.style['touchAction'] = 'pan-y'
+// savedAnswers.addEventListener("touchstart", startTouch, false);
+// savedAnswers.addEventListener("touchmove", moveTouch, false);
 let slidtrck = 0
 let startx = null;
 let starty = null;
 function startTouch(e) {
+  
   startx = e.touches[0].clientX;
   starty = e.touches[0].clientY;
 }
+let move = -170
 function moveTouch(e) {
+
   if (startx === null)return; 
   if (starty === null)return;
  
@@ -54,14 +69,21 @@ function moveTouch(e) {
     // sliding horizontally
     if (diffX > 0) {
           //sidebar menu close
-          let bar = document.getElementById('sidebar')
-          if(bar.style.width === '50vw') {
-            closenav()
-          }
+        if(check) {
+            let bar = document.getElementById('sidebar')
+            if(bar.style.width === '50vw') {
+              closenav()
+            }
+        }
       if(slidtrck >= 3)return
       // swiped left
 
       slidtrck++
+      
+      //circle movement to simulate different pages
+      // move += 110
+      // startcircle.style.top = `${move}px`
+
       
 
 
@@ -72,28 +94,47 @@ function moveTouch(e) {
         startp[y].style.display = 'none'
         startp[y].children[0].style.fontSize = 'xx-large'
       })
-      slider[slidtrck].style.width = '40%'
+      slider[slidtrck].style.width = '30%'
       slider[slidtrck].style.backgroundColor = 'gold'
       startp[slidtrck].style.display = 'block'
     } else {
-      if(getstarted.style.display === 'none') {
-        sideload()
-      }
+      if(check) {
+        if(getstarted.style.display === 'none') {
+          sideload()
+        }
+    }
       if(slidtrck <= 0)return
       // swiped right 
       slidtrck--
       
+      //circle movement to simulate different pages
+      // move -= 110
+      // startcircle.style.top = `${move}px`
+      
+      
+
+
       let arr = Array.from(slider)
       arr.forEach((x,y) => {
         x.style.width = '10%'
         x.style.backgroundColor = 'black'
         startp[y].style.display = 'none'
       })
-      slider[slidtrck].style.width = '40%'
+      slider[slidtrck].style.width = '30%'
       slider[slidtrck].style.backgroundColor = 'gold'
       startp[slidtrck].style.display = 'block'
     }  
-  }
+  } else {
+    if ( diffY > 0 ) {
+        /* up swipe */ 
+        console.log('up')
+       
+    } else { 
+        /* down swipe */
+        console.log('down')
+        
+    }                                                                 
+}
  
   startx = null;
   starty = null;
