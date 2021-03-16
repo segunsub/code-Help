@@ -8,30 +8,50 @@ document.addEventListener("DOMContentLoaded", () => {
    let headbar = document.getElementById('headerbar')
    let getstartedpage = document.getElementById('getstarted')
    let getstartedbtn = document.getElementById('getstartedbtn')
+   let savedsyntaxdiv = document.getElementById('savedAnswers')
    getstartedbtn.addEventListener('click',()=>removepage(getstartedpage)) 
    
    
+  //code syntax copy button
+    let copybtnsave = document.querySelectorAll('.codeBtn')
+    copybtnsave.forEach(btn => {
+        btn.addEventListener('click',(e) => copytxtsvc(e.path[2].children[1].innerText,e.target))
+    })
+    function copytxtsvc(input,target) {
+          navigator.clipboard.writeText(input).then(function() {
+            target.innerText = 'copied';
+            setTimeout(() => {
+              target.innerText = 'Copy';
+        }, 3000)
+          })
+    }
 
-   let copybtnsave = document.querySelectorAll('.codeBtn')
-   copybtnsave.forEach(btn => {
-      btn.addEventListener('click',(e) => copytxtsvc(e.path[2].children[1].innerText))
-   })
-   function copytxtsvc(input) {
-        navigator.clipboard.writeText(input).then(function() {
-          copybtnsave.innerText = 'copied';
-          setTimeout(() => {
-          copybtnsave.innerText = 'Copy';
-      }, 3000)
-        })
-   }
+
+
+    //code syntax delete button
+  let delbtnsyn = document.querySelectorAll('.delBtn')
+  delbtnsyn.forEach(btn => {
+    btn.addEventListener('click',(e) => removesynt(e.path[1].children[1].lang,e.path[2],e.path[1].children[1].index))
+  })
+  function removesynt(localsave,syntaxdiv,indexls) {
+    user.remove(localsave,indexls);
+    savedsyntaxdiv.removeChild(syntaxdiv)
+  }
 })
+
+
+
 const user = new Save()
 //localStorage populate user save tab
 let savedSyntax = user.getSaveList()
+if(savedSyntax !== null) {
+// console.log(savedSyntax)
 for(let keys in savedSyntax) {
-  savedSyntax[keys].forEach(txt => {
-    postAnswer(keys,txt)
+  savedSyntax[keys].forEach((txt,index) => {
+    user.saveList[keys] = [txt]
+    postAnswer(keys,txt,index)
   })
+}
 }
 
 srhchoice.addEventListener('click', (e) => {
@@ -345,11 +365,12 @@ function copytxt(clck,input) {
     if(clck.innerText !== 'Saved') {
       if(user.saveList[input.classList[2]] === undefined){
         user.saveList[input.classList[2]] = [input.innerHTML]
-        postAnswer(input.classList[2],input.innerHTML,form)
+        postAnswer(input.classList[2],input.innerHTML)
       }else {
         user.saveList[input.classList[2]].push(input.innerHTML)
-        postAnswer(input.classList[2],input.innerHTML,form)
+        postAnswer(input.classList[2],input.innerHTML)
       }
+
       user.setSaveList()
       clck.innerText = 'Saved';
   }

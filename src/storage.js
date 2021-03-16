@@ -1,7 +1,6 @@
 class Save {
     constructor() {
       this.saveList = { } 
-      // || this.getWatchList();
     }
   
     getSaveList() {
@@ -12,12 +11,14 @@ class Save {
     setSaveList() {
       localStorage.setItem('userSaveList', JSON.stringify(this.saveList));
     } 
-//   reset() {
-//       this.watchList.tv = {}
-//       this.watchList.movie = {}
-//   }
-//     clearUserData() {
-//       localStorage.clear();
-//       this.getWatchList();
-//     }
+    remove(objectls,index) {
+        let save = this.getSaveList()
+        if(save[objectls].length === 1) {
+          delete save[objectls]
+          localStorage.setItem('userSaveList', JSON.stringify(save))
+        }else {
+          save[objectls].splice(index, 1);
+          localStorage.setItem('userSaveList', JSON.stringify(save))
+        }
+    }
   }

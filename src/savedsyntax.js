@@ -8,7 +8,7 @@
 
 
 let button = document.getElementById('savedList')
-let searchpage 
+// let searchpage 
 button.addEventListener('click', revealdiv)
 let answerdiv = document.getElementById('savedAnswers')
 answerdiv.style.display = 'none'
@@ -21,14 +21,14 @@ function revealdiv() {
    answerdiv.style.display = 'block'
    // answerdiv.style.backgroundColor = 'rgb(228,230,232)'
 }
-function postAnswer(title,syntax,form) {
-      if(form !== undefined) {
-         searchpage = form
-      }else{}
+function postAnswer(title,syntax,arrindex) {
+
        let codebar = document.createElement('div')
        codebar.classList.add('codeToolBar')
        let codetitle = document.createElement('h2')
        codetitle.classList.add('codeLang')
+       codetitle.lang = title
+       codetitle.index = arrindex
        codetitle.innerText = title.slice(9, 19)
        let codepre = document.createElement('pre')
        codepre.classList.add('codeBox')
@@ -39,7 +39,7 @@ function postAnswer(title,syntax,form) {
        codebutton.classList.add('codeBtn')
        codebutton.innerText = 'Copy'
        let codebuttondel = document.createElement('button')
-       codebuttondel.classList.add('codeBtn')
+       codebuttondel.classList.add('delBtn')
        codebuttondel.innerText = 'Delete'
        codetoolbar.append(codebuttondel,codetitle,codebutton)
        codebar.append(codetoolbar,codepre)

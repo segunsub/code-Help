@@ -300,6 +300,14 @@ padding-top: 30%;
   background: #232222;
   box-shadow: 0 2px 0 0 rgb(255 224 0 / 64%);
 }
+.delBtn {
+  border-radius: 0.5em;
+  height: 1.7em;
+  width: 3.5em;
+  color: #a5a5a5;
+  background: #232222;
+  box-shadow: 0 2px 0 0 rgb(238,238,238/ 64%);
+}
 .codeBox {
   padding-left: 10px;
   padding-right: 10px;

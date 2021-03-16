@@ -1,5 +1,6 @@
 # code-Help
     Make the saved syntax a div that get populated everytime
+    implement the delete button
     a syntax is saved
     add Google signin button
     feedback from
