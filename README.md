@@ -1,15 +1,13 @@
 # code-Help
-    Make the saved syntax a div that get populated everytime
-    implement the delete button
-    a syntax is saved
+   
     add Google signin button
-    feedback from
+    feedback form
     add about
     add YouTube videos for extra help and mdn search api
     implement custom search (extra feature)
     update color scheme if needed
-    implement service workers ability to save response
-    add get started page
+ 
+  
     (search bar with color highlight 
      options filter
      YouTube api in videos help(

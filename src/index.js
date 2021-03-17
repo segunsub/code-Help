@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
    let getstartedpage = document.getElementById('getstarted')
    let getstartedbtn = document.getElementById('getstartedbtn')
    let savedsyntaxdiv = document.getElementById('savedAnswers')
+   
    getstartedbtn.addEventListener('click',()=>removepage(getstartedpage)) 
    
    
@@ -212,6 +213,13 @@ if ("serviceWorker" in navigator) {
  alert(`browser not supported`)
 }
 
+
+savedAnswers.addEventListener('click',() => {
+  let bar = document.getElementById('sidebar')
+  if(bar.style.width === '50vw') {
+    closenav()
+  }
+})
 let form = document.getElementById('search')
 form.addEventListener('click',() => {
   let bar = document.getElementById('sidebar')
