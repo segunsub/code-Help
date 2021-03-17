@@ -43,6 +43,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 const user = new Save()
+const newrend = new Render()
+const Apicall = new API()
+
+//click adjust function for extra help
+function clickBox(input) {
+  input.addEventListener('click', (e) => {
+    e.target.style.height = 'auto'
+  })
+  input.addEventListener('dbclick', (e) => {
+    e.target.style.height = '10em'
+  })
+}
+ newrend.clickfunc = clickBox
 //localStorage populate user save tab
 let savedSyntax = user.getSaveList()
 if(savedSyntax !== null) {
@@ -50,7 +63,7 @@ if(savedSyntax !== null) {
 for(let keys in savedSyntax) {
   savedSyntax[keys].forEach((txt,index) => {
     user.saveList[keys] = [txt]
-    postAnswer(keys,txt,index)
+    postAnswer(keys,txt,index,clickBox)
   })
 }
 }
@@ -77,7 +90,7 @@ slidedisable.addEventListener('click', () => {
 })
 //beta fix
 window.addEventListener("touchstart", startTouch, false);
-window.addEventListener("touchmove", moveTouch, false);
+window.addEventListener("touchmove", moveTouch, {passive: false});
 // mainpage.selector.style['touchAction'] = 'pan-y'
 // savedAnswers.addEventListener("touchstart", startTouch, false);
 // savedAnswers.addEventListener("touchmove", moveTouch, false);
@@ -230,6 +243,7 @@ form.addEventListener('click',() => {
 let search
 let first
 function grepper(e) { 
+  newrend.query = e.target[0].value
 let answerdiv = document.getElementById('savedAnswers')
 answerdiv.style.display = 'none'
   amtclick()
@@ -237,132 +251,15 @@ answerdiv.style.display = 'none'
  e.target.style.height = '90vh'
  e.target[0].style.height = '7%'
  search = document.getElementById('codesearch').value
- searchapi(search,srhchoice.value)
+  Apicall.searchapi(search,srhchoice.value)
  .then(val => {
    first = val
-   process(val)})
+   newrend.process(val)})
+
+
  e.target[0].value = ''
  form.innerHTML = `<label id="voiceover">Search Bar 
                 <input id="codesearch" type="text" name="search" placeholder="Search Code"></label>`
-}
-let timer = 0
-function process(obj) {
-  console.log(obj)
- if (first.answers.length == 0) {
- timer ++
- alt(search)
- .then(val => {
-   console.log(val, 'hey')
-   if(val.answers.length == 0){
-    return form.innerHTML = `<label id="voiceover">Search Bar
-    <input id="codesearch" type="text" name="search" placeholder="Search Code"></label>
-    <h1>NO Answer Available At The Moment</h1>`
-   }
-   if(val.answers.length == 0 && first.answers.length == 0 && first.more_answers.length == 0) {
-     return form.innerHTML = `<label id="voiceover">Search Bar
-                               <input id="codesearch" type="text" name="search" placeholder="Search Code"></label>
-                               <h1>NO Answer Available At The Moment</h1>`
-                               //probably add an action to post. if reached there are no answer
-   }
-   altprocess(val)
- })
-}
-obj.answers.forEach((each) => {
- if(each.language == 'whatever') {
-   each.language = 'English'
- }
- if(each.video_name !== null && each.video_name !== '' ) {
-   console.log(each.video_name)
- }
- let toolbar = document.createElement('div')
- toolbar.classList.add('toolbar')
- let toolbaritem = document.createElement('div')
- toolbaritem.classList.add('toolbar-item')
- let barbutton = document.createElement('button')
-    barbutton.type = 'button'
-    barbutton.innerText = 'Copy'
-let savebutton = document.createElement('button')
-     savebutton.type = 'button'
-     savebutton.classList.add('svbtn')
-     savebutton.innerText = 'Save'
- let searchcontain = document.createElement('div')
-    searchcontain.classList.add('code-toolbar')
- let pre = document.createElement('pre')
- let classesToAdd = [ 'line-numbers', `language-${each.language}`, 'clicker'];
- pre.classList.add(...classesToAdd);
- pre.style.paddingLeft = '10px'
- pre.style.paddingRight = '10px'
- let view = document.createElement('code')
- view.classList.add(`language-${each.language}`);
- let h2 = document.createElement('h2')
- h2.classList.add('lang')
- let p = document.createElement('p')
- p.classList.add('answer')
- let langtitle = document.getElementById('rmcodename')
- if(!langtitle.checked) {
-  h2.innerText = `${each.language}`
- }
- view.append(h2)
- view.innerHTML = `${each.answer}`
- pre.append(view)
- toolbar.append(toolbaritem)
- toolbaritem.style.display = 'flex'
- toolbaritem.append(savebutton,barbutton)
- searchcontain.append(h2,pre,toolbar)
-form.append(searchcontain)
-})
-
-
-}
-function altprocess(obj) {
-console.log(obj)
-obj.answers.forEach((each) => {
- if(each.language == 'whatever') {
-   each.language = 'English'
- }
- if(each.video_name !== null && each.video_name !== '' ) {
-   console.log(each.video_name)
- }
-
-
- let toolbar = document.createElement('div')
- toolbar.classList.add('toolbar')
- let toolbaritem = document.createElement('div')
- toolbaritem.classList.add('toolbar-item')
- let barbutton = document.createElement('button')
-    barbutton.type = 'button'
-    barbutton.innerText = 'Copy'
-  let savebutton = document.createElement('button')
-  savebutton.type = 'button'
-  savebutton.classList.add('svbtn')
-  savebutton.innerText = 'Save'
- let searchcontain = document.createElement('div')
-    searchcontain.classList.add('code-toolbar')
- let pre = document.createElement('pre')
- let classesToAdd = [ 'line-numbers', `language-${each.language}`, 'clicker'];
- pre.classList.add(...classesToAdd);
- pre.style.paddingLeft = '10px'
-  pre.style.paddingRight = '10px'
- let view = document.createElement('code')
- view.classList.add(`language-${each.language}`);
- let h2 = document.createElement('h2')
- h2.classList.add('lang')
- let p = document.createElement('p')
- p.classList.add('answer')
- let langtitle = document.getElementById('rmcodename')
- if(!langtitle.checked) {
-  h2.innerText = `${each.language}`
- }
- view.append(h2)
- view.innerHTML = `${each.answer}`
-
- pre.append(view)
- toolbar.append(toolbaritem)
- toolbaritem.style.display = 'flex'
- toolbaritem.append(savebutton,barbutton)
- searchcontain.append(h2,pre,toolbar)
-form.append(searchcontain)
-})
 }
 
 
@@ -373,10 +270,10 @@ function copytxt(clck,input) {
     if(clck.innerText !== 'Saved') {
       if(user.saveList[input.classList[2]] === undefined){
         user.saveList[input.classList[2]] = [input.innerHTML]
-        postAnswer(input.classList[2],input.innerHTML)
+        postAnswer(input.classList[2],input.innerHTML,clickBox)
       }else {
         user.saveList[input.classList[2]].push(input.innerHTML)
-        postAnswer(input.classList[2],input.innerHTML)
+        postAnswer(input.classList[2],input.innerHTML,clickBox)
       }
 
       user.setSaveList()
@@ -399,6 +296,7 @@ function copytxt(clck,input) {
  }
 let timerchange = 0
 function amtclick(){
+  // newrend.queue = true
 let clickamt = setInterval(() => {
   let copybtn = document.querySelectorAll('.toolbar-item')
   let clickchange = document.querySelectorAll('.clicker')
@@ -424,32 +322,6 @@ if(clickchange.length > 0 || timerchange >= 5)clearInterval(clickamt)
 
 
 
-async function searchapi(input,bysearch) {
-  let bycode = document.getElementById('bycode')
-  let bytitle = document.getElementById('bytitle')
-  if (bycode.checked && bytitle.checked) {
-    let res = await fetch(`https://www.codegrepper.com/api/search.php?q=${input}&search_options=search_titles,search_code`)
-    let data = await res.json()
-    return data
-  }else if(bycode.checked) {
-    let res = await fetch(`https://www.codegrepper.com/api/search.php?q=${input}&search_options=search_code`)
-    let data = await res.json()
-    return data
-  }else if (bytitle.checked) {
-    let res = await fetch(`https://www.codegrepper.com/api/search.php?q=${input} ${bysearch}&search_options=search_titles`)
-    let data = await res.json()
-    return data
-  }else{
-    let res = await fetch(`https://www.codegrepper.com/api/get_answers_1.php?v=2&s=${input}`)
-    let data = await res.json()
-    return data
-  }
-}
-async function alt(input) {
-  let res = await fetch(`https://www.codegrepper.com/api/search.php?q=${input}`)
-  let data = await res.json()
-  return data
-}
 //video tutorial
 // https://www.codegrepper.com/video_uploads/3412_ztzlstaFheod3t8IZWxMtV31xqoEJ0VfGVHqWfJCEWdVrIno8PGi4vS.mp4
 

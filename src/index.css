@@ -323,9 +323,29 @@ padding-top: 30%;
   font-family: monospace;
 }
 
-
-
-
+/* more Help styles */
+.titleCap {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: .5em;
+}
+.mdnSummary {
+  background-color: #f5f2f0;
+  color: black;
+  border-radius: 20px;
+  height: 10em;
+  padding: .3em;
+  overflow-y: scroll;
+  font-size: 1.8em;
+  font-family: monospace;
+}
+.mainLink {
+  color: blue;
+  font-size: 1.5em;
+  background-color: #2d2b2b8a;
+  text-decoration: none;
+  text-align: center;
+}
 
 
 
