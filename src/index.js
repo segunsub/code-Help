@@ -90,7 +90,7 @@ slidedisable.addEventListener('click', () => {
 })
 //beta fix
 window.addEventListener("touchstart", startTouch, false);
-window.addEventListener("touchmove", moveTouch, {passive: false});
+window.addEventListener("touchmove", moveTouch,  false);
 // mainpage.selector.style['touchAction'] = 'pan-y'
 // savedAnswers.addEventListener("touchstart", startTouch, false);
 // savedAnswers.addEventListener("touchmove", moveTouch, false);
