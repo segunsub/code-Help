@@ -113,17 +113,18 @@ function moveTouch(e) {
  
   let diffX = startx - currentX;
   let diffY = starty - currentY;
- 
+
   if (Math.abs(diffX) > Math.abs(diffY)) {
     // sliding horizontally
     if (diffX > 0) {
           //sidebar menu close
-        if(check) {
+          if(check){
             let bar = document.getElementById('sidebar')
             if(bar.style.width === '50vw') {
               closenav()
             }
-        }
+          }
+        
       if(slidtrck >= 3)return
       // swiped left
 
@@ -147,7 +148,8 @@ function moveTouch(e) {
       slider[slidtrck].style.backgroundColor = 'gold'
       startp[slidtrck].style.display = 'block'
     } else {
-      if(check) {
+
+      if(check && currentX <= 25) {
         if(getstarted.style.display === 'none') {
           sideload()
         }
@@ -173,17 +175,7 @@ function moveTouch(e) {
       slider[slidtrck].style.backgroundColor = 'gold'
       startp[slidtrck].style.display = 'block'
     }  
-  } else {
-    if ( diffY > 0 ) {
-        /* up swipe */ 
-        console.log('up')
-       
-    } else { 
-        /* down swipe */
-        console.log('down')
-        
-    }                                                                 
-}
+  }
  
   startx = null;
   starty = null;

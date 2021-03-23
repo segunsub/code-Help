@@ -12,8 +12,8 @@ class Render {
             parent.appendChild(link)
             this.helpBox(objs,parent)
     }
-    altprocess(obj) {
-        console.log(obj)
+    altprocess(obj,check) {
+        if(check === 'Syntax' || check === 'ALL')obj.answers = obj
         obj.answers.forEach((each) => {
          if(each.language == 'whatever') {
            each.language = 'English'
@@ -63,12 +63,13 @@ class Render {
         })
           //More Help Page
           if(mrHelp.checked) {
-            this.moreHelpFunc(moreHelp.value,e.target[0].value)
+            if(check !== 'Syntax'){
+              this.moreHelpFunc(moreHelp.value,e.target[0].value)
+            }
         }
         }
     process(obj) {
             let timer = 0
-            console.log(obj)
            if (first.answers.length == 0) {
            timer ++
            Apicall.alt(search)
@@ -95,6 +96,7 @@ class Render {
              this.altprocess(val)
            })
           }
+          if(moreHelp.value === 'Syntax' || moreHelp.value === 'ALL' && mrHelp.checked)  this.moreHelpFunc(moreHelp.value,'more_answers',obj.more_answers)
           obj.answers.forEach((each) => {
            if(each.language == 'whatever') {
              each.language = 'English'
@@ -145,14 +147,21 @@ class Render {
                 }
           }
     //Mdn More Help
-    moreHelpFunc(input,evnt) {
-        console.log(input)
+    moreHelpFunc(input,evnt,obj) {
         if(input === 'ALL') {
+          //Every option available
             Apicall.Mdnapi(evnt).then(res => newrend.rendermh(res.documents,evnt,form))
         }else if(input === 'Mdn') {
+          //Mdn option
           Apicall.Mdnapi(evnt).then(res => newrend.rendermh(res.documents,evnt,form))
+        }else if(input === 'Youtube') {
+          //Youtube options
+         
         }else {
-      
+          //more code syntax
+          if(obj !== undefined){
+            this.altprocess(obj,input)
+          }
         }
       }
     helpBox(input,parent) {

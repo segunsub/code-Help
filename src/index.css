@@ -280,11 +280,7 @@ padding-top: 30%;
   padding-right: 2px;
   overflow-y: scroll;
 }
-.codeToolBar {
 
-  /* background-color: rgb(46, 45, 45); */
-  /* height: 250px; */
-}
 .toolBar {
   font-size: large;
   display: flex;
@@ -343,7 +339,7 @@ padding-top: 30%;
   color: blue;
   font-size: 1.5em;
   background-color: #2d2b2b8a;
-  text-decoration: none;
+  /* text-decoration: none; */
   text-align: center;
 }
 
