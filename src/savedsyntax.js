@@ -21,7 +21,7 @@ function revealdiv() {
    answerdiv.style.display = 'block'
    // answerdiv.style.backgroundColor = 'rgb(228,230,232)'
 }
-function postAnswer(title,syntax,arrindex,func) {
+function postAnswer(title,syntax,arrindex) {
 
        let codebar = document.createElement('div')
        codebar.classList.add('codeToolBar')
@@ -44,5 +44,14 @@ function postAnswer(title,syntax,arrindex,func) {
        codetoolbar.append(codebuttondel,codetitle,codebutton)
        codebar.append(codetoolbar,codepre)
        answerdiv.append(codebar)
-       func(codepre)
+       clickBox(codepre)
 }
+//click adjust function for extra help
+function clickBox(input) {
+   input.addEventListener('click', (e) => {
+     e.target.style.height = 'auto'
+   })
+   input.addEventListener('dbclick', (e) => {
+     e.target.style.height = '10em'
+   })
+ }

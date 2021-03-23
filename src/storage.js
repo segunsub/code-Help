@@ -11,8 +11,9 @@ class Save {
     setSaveList() {
       localStorage.setItem('userSaveList', JSON.stringify(this.saveList));
     } 
-    remove(objectls,index) {
+    removeg(objectls,index) {
         let save = this.getSaveList()
+        console.log(save)
         if(save[objectls].length === 1) {
           delete save[objectls]
           localStorage.setItem('userSaveList', JSON.stringify(save))

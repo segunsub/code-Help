@@ -1,3 +1,6 @@
+const user = new Save()
+const newrend = new Render()
+const Apicall = new API()
 document.addEventListener("DOMContentLoaded", () => {
   let form = document.getElementById('search')
    form.addEventListener("submit", grepper);
@@ -8,17 +11,25 @@ document.addEventListener("DOMContentLoaded", () => {
    let headbar = document.getElementById('headerbar')
    let getstartedpage = document.getElementById('getstarted')
    let getstartedbtn = document.getElementById('getstartedbtn')
-   let savedsyntaxdiv = document.getElementById('savedAnswers')
+  
    
    getstartedbtn.addEventListener('click',()=>removepage(getstartedpage)) 
    
    
+
+
+  delete_Saved()
+  save_button()
+})
   //code syntax copy button
-    let copybtnsave = document.querySelectorAll('.codeBtn')
-    copybtnsave.forEach(btn => {
-        btn.addEventListener('click',(e) => copytxtsvc(e.path[2].children[1].innerText,e.target))
-    })
-    function copytxtsvc(input,target) {
+  // setInterval(() => {
+    function save_button() {
+      let copybtnsave = document.querySelectorAll('.codeBtn')
+      copybtnsave.forEach(btn => {
+          btn.addEventListener('click',(e) => copytxtsvc(e.path[2].children[1].innerText,e.target))
+      })
+      
+        function copytxtsvc(input,target) {
           navigator.clipboard.writeText(input).then(function() {
             target.innerText = 'copied';
             setTimeout(() => {
@@ -26,25 +37,26 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 3000)
           })
     }
-
-
-
+      }
     //code syntax delete button
-  let delbtnsyn = document.querySelectorAll('.delBtn')
-  delbtnsyn.forEach(btn => {
-    btn.addEventListener('click',(e) => removesynt(e.path[1].children[1].lang,e.path[2],e.path[1].children[1].index))
-  })
-  function removesynt(localsave,syntaxdiv,indexls) {
-    user.remove(localsave,indexls);
-    savedsyntaxdiv.removeChild(syntaxdiv)
-  }
-})
+    function delete_Saved() {
+      let savedsyntaxdiv = document.getElementById('savedAnswers')
+      let delbtnsyn = document.querySelectorAll('.delBtn')
+      delbtnsyn.forEach(btn => {
+        btn.addEventListener('click',(e) => removesynt(e.path[1].children[1].lang,e.path[2],e.path[1].children[1].index))
+      })
+      function removesynt(localsave,syntaxdiv,indexls) {
+        console.log(localsave,indexls)
+        user.removeg(localsave,indexls);
+        savedsyntaxdiv.removeChild(syntaxdiv)
+      }
+    }
+    
+    // },1000)
+    
 
 
 
-const user = new Save()
-const newrend = new Render()
-const Apicall = new API()
 
 //click adjust function for extra help
 function clickBox(input) {
@@ -55,7 +67,6 @@ function clickBox(input) {
     e.target.style.height = '10em'
   })
 }
- newrend.clickfunc = clickBox
 //localStorage populate user save tab
 let savedSyntax = user.getSaveList()
 if(savedSyntax !== null) {
@@ -63,7 +74,8 @@ if(savedSyntax !== null) {
 for(let keys in savedSyntax) {
   savedSyntax[keys].forEach((txt,index) => {
     user.saveList[keys] = [txt]
-    postAnswer(keys,txt,index,clickBox)
+    user.setSaveList()
+    postAnswer(keys,txt,index)
   })
 }
 }
@@ -257,17 +269,21 @@ answerdiv.style.display = 'none'
 
 
 function copytxt(clck,input) {
-  console.log(input)
+  console.log(clck, input)
   if(clck.classList[0] == 'svbtn') {
     if(clck.innerText !== 'Saved') {
       if(user.saveList[input.classList[2]] === undefined){
         user.saveList[input.classList[2]] = [input.innerHTML]
         postAnswer(input.classList[2],input.innerHTML,clickBox)
+        delete_Saved()
       }else {
-        user.saveList[input.classList[2]].push(input.innerHTML)
-        postAnswer(input.classList[2],input.innerHTML,clickBox)
+        if(!user.saveList[input.classList[2]].includes(input.innerHTML)) {
+          user.saveList[input.classList[2]].push(input.innerHTML)
+          postAnswer(input.classList[2],input.innerHTML,clickBox)
+          delete_Saved()
+        }
       }
-
+      save_button()
       user.setSaveList()
       clck.innerText = 'Saved';
   }
