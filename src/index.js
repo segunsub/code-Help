@@ -54,10 +54,6 @@ document.addEventListener("DOMContentLoaded", () => {
     
     // },1000)
     
-
-
-
-
 //click adjust function for extra help
 function clickBox(input) {
   input.addEventListener('click', (e) => {
@@ -145,9 +141,6 @@ function moveTouch(e) {
       //circle movement to simulate different pages
       // move += 110
       // startcircle.style.top = `${move}px`
-
-      
-
 
       let arr = Array.from(slider)
       arr.forEach((x,y) => {
@@ -287,8 +280,6 @@ function copytxt(clck,input) {
       user.setSaveList()
       clck.innerText = 'Saved';
   }
-    
-
   return
   }
 
