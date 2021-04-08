@@ -151,7 +151,10 @@ class Render {
         if(input === 'ALL') {
           //Every option available
             Apicall.Mdnapi(evnt).then(res => newrend.rendermh(res.documents,evnt,form))
-        }else if(input === 'Mdn') {
+            if(obj !== undefined){
+              this.altprocess(obj,input)
+            }
+          }else if(input === 'Mdn') {
           //Mdn option
           Apicall.Mdnapi(evnt).then(res => newrend.rendermh(res.documents,evnt,form))
         }else if(input === 'Youtube') {
@@ -178,8 +181,16 @@ class Render {
            codepre.innerHTML = val.summary
            codebar.append(codetitle,codepre)
            parent.append(codebar)
-           this.clickfunc(codepre)
+           this.clickable(codepre)
         })
 
+    }
+    clickable(div) {
+      div.addEventListener('click', (e) => {
+        e.target.style.height = 'auto'
+      })
+      div.addEventListener('dbclick', (e) => {
+        e.target.style.height = '10em'
+      })
     }
   }

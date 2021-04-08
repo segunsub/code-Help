@@ -11,7 +11,7 @@
  
   
     (search bar with color highlight 
-     options filter
+    
      YouTube api in videos help(
      with mdn search and custom search if added.)
      sign in page for user name in options tab.

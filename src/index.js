@@ -86,9 +86,11 @@ let mainpage = document.getElementById('search')
 let slider = document.querySelector('#slider').children
 let startp = document.querySelector('#descript').children
 let startcircle = document.getElementById('circle')
+// let menuImge = document.getElementById('startimg')
 startpage.addEventListener("touchstart", startTouch, false);
 startpage.addEventListener("touchmove", moveTouch, false);
 let slidedisable = document.getElementById('slide')
+// const menuImages = ['']
 slidedisable.addEventListener('click', () => {
   if(slidedisable.checked) {
    check = false
@@ -143,6 +145,8 @@ function moveTouch(e) {
       // startcircle.style.top = `${move}px`
 
       let arr = Array.from(slider)
+      // console.log(menuImge.firstChild)
+      // menuImge.firstChild
       arr.forEach((x,y) => {
         x.style.width = '10%'
         x.style.backgroundColor = 'black'
